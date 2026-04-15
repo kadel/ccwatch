@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Claude Code
+.claude/
+
+# cctop - Bun/Node
+cctop/node_modules/
+cctop/dist/
+cctop/cctop
+cctop/*.bun-build
+
+# ClaudeMonitorBar - Swift
+ClaudeMonitorBar/.build/
