@@ -13,16 +13,16 @@ const HOOK_EVENTS = [
   "UserPromptSubmit",
 ] as const;
 
-const CCTOP_HOOK = { type: "command" as const, command: "cctop hook" };
+const CCWATCH_HOOK = { type: "command" as const, command: "ccwatch hook" };
 
 interface HookEntry {
   matcher?: string;
   hooks: { type: string; command?: string; prompt?: string; timeout?: number }[];
 }
 
-function hasCctopHook(entries: HookEntry[]): boolean {
+function hasCcwatchHook(entries: HookEntry[]): boolean {
   return entries.some((entry) =>
-    entry.hooks.some((h) => h.type === "command" && h.command === "cctop hook")
+    entry.hooks.some((h) => h.type === "command" && h.command === "ccwatch hook")
   );
 }
 
@@ -57,15 +57,15 @@ export async function installCommand(): Promise<void> {
   for (const event of HOOK_EVENTS) {
     const existing = hooksObj[event] ?? [];
 
-    if (hasCctopHook(existing)) {
+    if (hasCcwatchHook(existing)) {
       console.log(`  ✓ ${event} hook already installed`);
       continue;
     }
 
     const hookEntry: HookEntry =
       event === "PreToolUse" || event === "PostToolUse"
-        ? { matcher: ".*", hooks: [CCTOP_HOOK] }
-        : { hooks: [CCTOP_HOOK] };
+        ? { matcher: ".*", hooks: [CCWATCH_HOOK] }
+        : { hooks: [CCWATCH_HOOK] };
 
     existing.push(hookEntry);
     hooksObj[event] = existing;
@@ -75,16 +75,16 @@ export async function installCommand(): Promise<void> {
 
   // Status line
   const existingStatus = settings.statusLine as { command?: string } | undefined;
-  if (existingStatus?.command === "cctop status") {
+  if (existingStatus?.command === "ccwatch status") {
     console.log(`  ✓ statusLine already configured`);
   } else if (existingStatus) {
     console.log(
       `  ⚠ statusLine already set to: ${existingStatus.command ?? JSON.stringify(existingStatus)}`
     );
-    console.log(`    Replace with 'cctop status'? Updating...`);
-    settings.statusLine = { type: "command", command: "cctop status" };
+    console.log(`    Replace with 'ccwatch status'? Updating...`);
+    settings.statusLine = { type: "command", command: "ccwatch status" };
   } else {
-    settings.statusLine = { type: "command", command: "cctop status" };
+    settings.statusLine = { type: "command", command: "ccwatch status" };
     console.log(`  + statusLine configured`);
   }
 
@@ -96,17 +96,17 @@ export async function installCommand(): Promise<void> {
     console.log(`${hooksAdded} hook(s) added.`);
   }
 
-  // Check if cctop is in PATH
-  const which = Bun.spawnSync(["which", "cctop"]);
+  // Check if ccwatch is in PATH
+  const which = Bun.spawnSync(["which", "ccwatch"]);
   if (which.exitCode !== 0) {
     console.log(
-      "\n⚠ 'cctop' not found in PATH. Make sure to add the compiled binary to your PATH."
+      "\n⚠ 'ccwatch' not found in PATH. Make sure to add the compiled binary to your PATH."
     );
     console.log("  Build with: bun run build");
-    console.log("  Then copy the binary: cp cctop /usr/local/bin/");
+    console.log("  Then copy the binary: cp ccwatch /usr/local/bin/");
   } else {
-    console.log(`\ncctop binary found at: ${which.stdout.toString().trim()}`);
+    console.log(`\nccwatch binary found at: ${which.stdout.toString().trim()}`);
   }
 
-  console.log("\nDone! Start cctop in one terminal, then use Claude Code in another.");
+  console.log("\nDone! Start ccwatch in one terminal, then use Claude Code in another.");
 }

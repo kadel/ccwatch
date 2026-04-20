@@ -1,26 +1,26 @@
-# Claude Monitor
+# ccwatch
 
 Real-time monitoring for Claude Code sessions. Two apps that work together:
 
-- **[cctop](cctop/)** — Terminal UI that tracks all active sessions (`htop` for Claude Code)
-- **[ClaudeMonitorBar](ClaudeMonitorBar/)** — macOS menu bar app with a floating overlay panel
+- **[ccwatch](cli/)** — Terminal UI that tracks all active sessions (`htop` for Claude Code)
+- **[ccwatch-bar](bar/)** — macOS menu bar app with a floating overlay panel
 
-Both read session data from `~/.config/cctop/sessions/`, produced by hooks that `cctop` registers in Claude Code.
+Both read session data from `~/.config/ccwatch/sessions/`, produced by hooks that `ccwatch` registers in Claude Code.
 
 ## Quick start
 
 ```bash
-# Build and install cctop
-cd cctop
+# Build and install ccwatch
+cd cli
 bun install && bun run build
-cp cctop /usr/local/bin/
-cctop install
+cp ccwatch /usr/local/bin/
+ccwatch install
 
 # Run the TUI
-cctop
+ccwatch
 
 # Or run the menu bar app
-cd ../ClaudeMonitorBar
+cd ../bar
 swift run
 ```
 

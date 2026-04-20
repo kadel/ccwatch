@@ -6,10 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This monorepo contains two apps that work together to monitor active Claude Code sessions in real time:
 
-- **`cctop/`** — A TUI (terminal UI) monitor written in TypeScript/Bun. Hooks into Claude Code's hook system and status line to track all active sessions.
-- **`ClaudeMonitorBar/`** — A macOS menu bar app written in Swift (SPM). Displays the same session data in a floating overlay panel.
+- **`cli/`** — A TUI (terminal UI) monitor written in TypeScript/Bun. Hooks into Claude Code's hook system and status line to track all active sessions.
+- **`bar/`** — A macOS menu bar app written in Swift (SPM). Displays the same session data in a floating overlay panel.
 
-Both apps read per-session JSON files under `~/.config/cctop/sessions/`. See each sub-project for build commands, architecture, and details:
+Both apps read per-session JSON files under `~/.config/ccwatch/sessions/`. See each sub-project for build commands, architecture, and details:
 
-- @cctop/CLAUDE.md
-- @ClaudeMonitorBar/CLAUDE.md
+- @cli/CLAUDE.md
+- @bar/CLAUDE.md

@@ -1,4 +1,4 @@
-// Generated from cctop/src/types.ts — do not edit manually.
+// Generated from cli/src/types.ts — do not edit manually.
 // Run: bun generate-models.ts
 
 import Foundation

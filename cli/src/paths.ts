@@ -2,7 +2,7 @@ import { execFileSync } from "child_process";
 import { homedir } from "os";
 import { join } from "path";
 
-const CONFIG_DIR = join(homedir(), ".config", "cctop");
+const CONFIG_DIR = join(homedir(), ".config", "ccwatch");
 const SESSIONS_DIR = join(CONFIG_DIR, "sessions");
 const CLAUDE_SETTINGS = join(homedir(), ".claude", "settings.json");
 
@@ -23,10 +23,10 @@ export async function ensureDirs(): Promise<void> {
  * Check whether a command line (ps args=) looks like a Claude Code process.
  * Matches "claude" as a whole word (case-insensitive) in the full command line,
  * which catches: /path/to/claude, node .../claude-code/..., Claude.app, etc.
- * Excludes cctop's own processes.
+ * Excludes ccwatch's own processes.
  */
 function isClaudeArgs(args: string): boolean {
-  return /\bclaude\b/i.test(args) && !/\bcctop\b/i.test(args);
+  return /\bclaude\b/i.test(args) && !/\bccwatch\b/i.test(args);
 }
 
 /**

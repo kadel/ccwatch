@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What is cctop
+## What is ccwatch
 
 A real-time TUI monitor for Claude Code sessions. It hooks into Claude Code's hook system and status line to track all active sessions, displaying state, cost, context usage, and current activity in a `top`-like terminal interface.
 
@@ -11,7 +11,7 @@ A real-time TUI monitor for Claude Code sessions. It hooks into Claude Code's ho
 ```bash
 bun install                # install deps
 bun run dev                # run directly via bun (development)
-bun run build              # compile to standalone binary: ./cctop
+bun run build              # compile to standalone binary: ./ccwatch
 bun build src/index.ts --outdir dist --target bun  # bundle without compiling (for type-checking)
 bunx tsc --noEmit          # type-check only
 ```
@@ -24,14 +24,14 @@ No test framework is configured. No linter is configured.
 
 The binary has four subcommands routed through `src/index.ts` + `src/cli.ts`:
 
-- **`cctop`** (default) — launches the TUI (`src/tui.ts`)
-- **`cctop hook`** — receives Claude Code hook events on stdin, writes per-session state to `sessions/{id}.json` (`src/hook.ts`)
-- **`cctop status`** — receives Claude Code status line JSON on stdin, merges cost/context/model into the session file and outputs a formatted status line to stdout (`src/statusline.ts`)
-- **`cctop install`** — registers cctop hooks and status line in `~/.claude/settings.json` (`src/install.ts`)
+- **`ccwatch`** (default) — launches the TUI (`src/tui.ts`)
+- **`ccwatch hook`** — receives Claude Code hook events on stdin, writes per-session state to `sessions/{id}.json` (`src/hook.ts`)
+- **`ccwatch status`** — receives Claude Code status line JSON on stdin, merges cost/context/model into the session file and outputs a formatted status line to stdout (`src/statusline.ts`)
+- **`ccwatch install`** — registers ccwatch hooks and status line in `~/.claude/settings.json` (`src/install.ts`)
 
 ### Data flow
 
-Claude Code invokes `cctop hook` and `cctop status` as shell commands via its hooks/statusLine config. Both read-modify-write per-session JSON files under `~/.config/cctop/sessions/`.
+Claude Code invokes `ccwatch hook` and `ccwatch status` as shell commands via its hooks/statusLine config. Both read-modify-write per-session JSON files under `~/.config/ccwatch/sessions/`.
 
 - `sessions/{session_id}.json` — current state per session (state, model, cost, context %, current tool)
 
@@ -60,4 +60,4 @@ Session cleanup is PID-based: if a session's stored PID is dead, it is removed i
 
 ### File paths
 
-All data lives under `~/.config/cctop/`. Claude Code settings at `~/.claude/settings.json`. Paths centralized in `src/paths.ts`.
+All data lives under `~/.config/ccwatch/`. Claude Code settings at `~/.claude/settings.json`. Paths centralized in `src/paths.ts`.

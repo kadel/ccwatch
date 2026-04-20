@@ -3,7 +3,7 @@ import Foundation
 struct SessionParser {
     static var sessionsDir: String {
         let home = FileManager.default.homeDirectoryForCurrentUser.path
-        return "\(home)/.config/cctop/sessions"
+        return "\(home)/.config/ccwatch/sessions"
     }
 
     private static func isProcessAlive(_ pid: Int) -> Bool {
@@ -11,9 +11,9 @@ struct SessionParser {
         return ret == 0 || (ret == -1 && errno == EPERM)
     }
 
-    /// Reads all session JSON files from ~/.config/cctop/sessions/.
+    /// Reads all session JSON files from ~/.config/ccwatch/sessions/.
     /// Filters out dead sessions in memory (by PID check) but never deletes files —
-    /// cleanup is solely the responsibility of cctop hooks and the TUI.
+    /// cleanup is solely the responsibility of ccwatch hooks and the TUI.
     static func loadSessions() -> [Session] {
         let fm = FileManager.default
         guard let files = try? fm.contentsOfDirectory(atPath: sessionsDir) else { return [] }

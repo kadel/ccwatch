@@ -169,16 +169,16 @@ export async function startTui(): Promise<void> {
     let output = CLEAR_SCREEN;
 
     // Header
-    output += `  ${BOLD}cctop${RESET}`;
+    output += `  ${BOLD}ccwatch${RESET}`;
     const quitHint = "q: quit";
-    const headerPad = Math.max(1, (process.stdout.columns || 80) - 7 - quitHint.length - 2);
+    const headerPad = Math.max(1, (process.stdout.columns || 80) - 9 - quitHint.length - 2);
     output += " ".repeat(headerPad) + `${DIM}${quitHint}${RESET}`;
     output += "\n\n";
 
     if (sessions.length === 0) {
       output += `  ${DIM}No active sessions${RESET}\n`;
       output += `  ${DIM}Start Claude Code in another terminal to see it here.${RESET}\n`;
-      output += `\n  ${DIM}Run 'cctop install' to set up hooks if you haven't already.${RESET}\n`;
+      output += `\n  ${DIM}Run 'ccwatch install' to set up hooks if you haven't already.${RESET}\n`;
     } else {
       for (const session of sessions) {
         output += renderSession(session, width) + "\n\n";

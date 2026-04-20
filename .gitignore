@@ -4,11 +4,11 @@
 # Claude Code
 .claude/
 
-# cctop - Bun/Node
-cctop/node_modules/
-cctop/dist/
-cctop/cctop
-cctop/*.bun-build
+# cli - Bun/Node
+cli/node_modules/
+cli/dist/
+cli/ccwatch
+cli/*.bun-build
 
-# ClaudeMonitorBar - Swift
-ClaudeMonitorBar/.build/
+# bar - Swift
+bar/.build/

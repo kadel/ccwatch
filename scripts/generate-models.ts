@@ -1,19 +1,19 @@
 #!/usr/bin/env bun
 /**
- * Reads cctop/src/types.ts and generates
- * Sources/ClaudeMonitorBar/Models.swift
+ * Reads cli/src/types.ts and generates
+ * bar/Sources/CCWatchBar/Models.swift
  *
- * Usage: bun generate-models.ts   (from ClaudeMonitorBar/)
+ * Usage: bun scripts/generate-models.ts   (from repo root)
  */
 
 import { readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 
 const ROOT = dirname(new URL(import.meta.url).pathname);
-const TYPES_PATH = join(ROOT, "../cctop/src/types.ts");
+const TYPES_PATH = join(ROOT, "../cli/src/types.ts");
 const OUTPUT_PATH = join(
   ROOT,
-  "Sources/ClaudeMonitorBar/Models.swift",
+  "../bar/Sources/CCWatchBar/Models.swift",
 );
 
 const src = readFileSync(TYPES_PATH, "utf-8");
@@ -89,7 +89,7 @@ function toCamelCase(raw: string): string {
 
 const lines: string[] = [];
 
-lines.push("// Generated from cctop/src/types.ts — do not edit manually.");
+lines.push("// Generated from cli/src/types.ts — do not edit manually.");
 lines.push("// Run: bun generate-models.ts");
 lines.push("");
 lines.push("import Foundation");

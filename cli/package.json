@@ -1,11 +1,11 @@
 {
-  "name": "cctop",
+  "name": "ccwatch",
   "version": "0.1.0",
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "dev": "bun run src/index.ts",
-    "build": "bun build --compile --minify src/index.ts --outfile cctop"
+    "build": "bun build --compile --minify src/index.ts --outfile ccwatch"
   },
   "devDependencies": {
     "@types/bun": "latest",

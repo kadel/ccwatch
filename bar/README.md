@@ -1,6 +1,6 @@
-# ClaudeMonitorBar
+# CCWatchBar
 
-A macOS menu bar app that displays active Claude Code sessions in a floating overlay panel. It reads the same session data produced by the [cctop](../cctop/) CLI.
+A macOS menu bar app that displays active Claude Code sessions in a floating overlay panel. It reads the same session data produced by the [ccwatch](../cli/) CLI.
 
 The overlay is a translucent, always-on-top panel that sits in a corner of your screen showing each session's project name, state, model, cost, and context usage — no need to switch to a terminal to check on your sessions.
 
@@ -8,7 +8,7 @@ The overlay is a translucent, always-on-top panel that sits in a corner of your 
 
 - macOS 13+
 - Swift 5.9+
-- [cctop](../cctop/) installed and running (produces the session data this app reads)
+- [ccwatch](../cli/) installed and running (produces the session data this app reads)
 
 ## Build & Run
 
@@ -22,7 +22,7 @@ This is a Swift Package Manager project — no Xcode project file needed.
 
 ## Usage
 
-Once running, ClaudeMonitorBar appears as a menu bar icon (no dock icon). Click the icon to access:
+Once running, CCWatchBar appears as a menu bar icon (no dock icon). Click the icon to access:
 
 - **Toggle Visibility** (`v`) — show/hide the overlay panel
 - **Position** — move the panel to any screen corner (top-left, top-right, bottom-left, bottom-right)
@@ -44,8 +44,8 @@ Visibility and corner position are saved in UserDefaults and restored on next la
 
 ## Code generation
 
-`Models.swift` is auto-generated from cctop's TypeScript types. Do not edit it manually:
+`Models.swift` is auto-generated from ccwatch's TypeScript types. Do not edit it manually:
 
 ```bash
-bun generate-models.ts
+bun scripts/generate-models.ts
 ```
