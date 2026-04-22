@@ -8,6 +8,7 @@
 cli/node_modules/
 cli/dist/
 cli/ccwatch
+cli/build/
 cli/*.bun-build
 
 # bar - Swift
