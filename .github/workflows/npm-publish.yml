@@ -17,13 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: oven-sh/setup-bun@v2
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
 
-      - run: npm install
+      - run: bun install --frozen-lockfile
 
-      - run: npx tsc
+      - run: bunx tsc
 
       - run: npm publish --access public --provenance
