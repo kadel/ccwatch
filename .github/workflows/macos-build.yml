@@ -54,15 +54,19 @@ jobs:
 
       - name: Notarize app
         env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+          ASC_API_KEY: ${{ secrets.ASC_API_KEY }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
         run: |
           ditto -c -k --keepParent "$APP_NAME.app" "$APP_NAME.zip"
 
+          API_KEY_PATH=$RUNNER_TEMP/api_key.p8
+          echo -n "$ASC_API_KEY" | base64 --decode -o $API_KEY_PATH
+
           xcrun notarytool submit "$APP_NAME.zip" \
-            --apple-id "$APPLE_ID" \
-            --password "$APPLE_APP_PASSWORD" \
-            --team-id "$TEAM_ID" \
+            --key "$API_KEY_PATH" \
+            --key-id "$ASC_API_KEY_ID" \
+            --issuer "$ASC_API_ISSUER_ID" \
             --wait
 
           xcrun stapler staple "$APP_NAME.app"
@@ -79,7 +83,8 @@ jobs:
         run: |
           gh release upload "$TAG_NAME" "$APP_NAME.zip" --clobber
 
-      - name: Clean up keychain
+      - name: Clean up keychain and credentials
         if: ${{ always() }}
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm -f $RUNNER_TEMP/api_key.p8
