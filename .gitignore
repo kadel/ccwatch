@@ -12,3 +12,5 @@ cli/*.bun-build
 
 # bar - Swift
 bar/.build/
+bar/*.app
+bar/*.zip
