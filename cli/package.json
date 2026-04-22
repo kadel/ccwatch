@@ -1,14 +1,21 @@
 {
-  "name": "ccwatch",
+  "name": "ccwatch-cli",
   "version": "0.1.0",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "bin": {
+    "ccwatch": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "bun run src/index.ts",
-    "build": "bun build --compile --minify src/index.ts --outfile ccwatch"
+    "build": "bun build --compile --minify src/index.ts --outfile ccwatch",
+    "build:node": "tsc"
   },
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/node": "^22",
     "typescript": "^5.7.0"
   }
 }

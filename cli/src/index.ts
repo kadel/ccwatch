@@ -1,25 +1,26 @@
-import { parseArgs } from "./cli";
+#!/usr/bin/env node
+import { parseArgs } from "./cli.js";
 
 const { subcommand } = parseArgs(process.argv.slice(2));
 
 switch (subcommand) {
   case "hook": {
-    const { hookCommand } = await import("./hook");
+    const { hookCommand } = await import("./hook.js");
     await hookCommand();
     break;
   }
   case "status": {
-    const { statusCommand } = await import("./statusline");
+    const { statusCommand } = await import("./statusline.js");
     await statusCommand();
     break;
   }
   case "install": {
-    const { installCommand } = await import("./install");
+    const { installCommand } = await import("./install.js");
     await installCommand();
     break;
   }
   case "tui": {
-    const { startTui } = await import("./tui");
+    const { startTui } = await import("./tui.js");
     await startTui();
     break;
   }

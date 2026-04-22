@@ -1,7 +1,7 @@
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { spawnSync } from "child_process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname } from "path";
-import { mkdirSync } from "fs";
-import { paths } from "./paths";
+import { paths } from "./paths.js";
 
 const HOOK_EVENTS = [
   "SessionStart",
@@ -97,15 +97,15 @@ export async function installCommand(): Promise<void> {
   }
 
   // Check if ccwatch is in PATH
-  const which = Bun.spawnSync(["which", "ccwatch"]);
-  if (which.exitCode !== 0) {
+  const which = spawnSync("which", ["ccwatch"], { encoding: "utf-8" });
+  if (which.status !== 0) {
     console.log(
       "\n⚠ 'ccwatch' not found in PATH. Make sure to add the compiled binary to your PATH."
     );
     console.log("  Build with: bun run build");
     console.log("  Then copy the binary: cp ccwatch /usr/local/bin/");
   } else {
-    console.log(`\nccwatch binary found at: ${which.stdout.toString().trim()}`);
+    console.log(`\nccwatch binary found at: ${String(which.stdout).trim()}`);
   }
 
   console.log("\nDone! Start ccwatch in one terminal, then use Claude Code in another.");

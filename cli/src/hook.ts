@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from "fs";
-import { ensureDirs, getClaudeCodePid, paths } from "./paths";
-import type { HookInput, Session, SessionState } from "./types";
+import { ensureDirs, getClaudeCodePid, paths } from "./paths.js";
+import type { HookInput, Session, SessionState } from "./types.js";
+import { readStdin } from "./utils.js";
 
 function extractDetail(input: HookInput): string | undefined {
   if (!input.tool_input) return undefined;
@@ -32,7 +33,7 @@ function writeSession(session: Session): void {
 export async function hookCommand(): Promise<void> {
   await ensureDirs();
 
-  const input = await Bun.stdin.text();
+  const input = await readStdin();
   if (!input.trim()) return;
 
   let parsed: HookInput;

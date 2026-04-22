@@ -1,5 +1,5 @@
 import { watch, type FSWatcher } from "fs";
-import { paths } from "./paths";
+import { paths } from "./paths.js";
 
 export type ChangeCallback = () => void;
 

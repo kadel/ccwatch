@@ -1,7 +1,7 @@
-import { ensureDirs } from "./paths";
-import { deriveSessions } from "./state";
-import type { Session, SessionState } from "./types";
-import { FileWatcher } from "./watcher";
+import { ensureDirs } from "./paths.js";
+import { deriveSessions } from "./state.js";
+import type { Session, SessionState } from "./types.js";
+import { FileWatcher } from "./watcher.js";
 
 // ANSI escape codes
 const ESC = "\x1b";

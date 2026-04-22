@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync, unlinkSync } from "fs";
-import { hasRunningClaudeProcess, paths } from "./paths";
-import type { Session } from "./types";
+import { hasRunningClaudeProcess, paths } from "./paths.js";
+import type { Session } from "./types.js";
 
 // Only used as a last resort for sessions with no PID when no Claude process is found
 const STALE_TIMEOUT_MS = 60 * 60 * 1000; // 1 hour

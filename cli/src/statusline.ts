@@ -1,8 +1,9 @@
 import { execFileSync } from "child_process";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { basename } from "path";
-import { ensureDirs, getClaudeCodePid, paths } from "./paths";
-import type { Session, StatusInput } from "./types";
+import { ensureDirs, getClaudeCodePid, paths } from "./paths.js";
+import type { Session, StatusInput } from "./types.js";
+import { readStdin } from "./utils.js";
 
 // ANSI color codes
 const CYAN = "\x1b[36m";
@@ -41,7 +42,7 @@ function getGitBranch(cwd: string): string | undefined {
 export async function statusCommand(): Promise<void> {
   await ensureDirs();
 
-  const input = await Bun.stdin.text();
+  const input = await readStdin();
   if (!input.trim()) return;
 
   let parsed: StatusInput;
