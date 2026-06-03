@@ -15,3 +15,6 @@ cli/*.bun-build
 bar/.build/
 bar/*.app
 bar/*.zip
+
+# Nix
+result
