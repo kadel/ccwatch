@@ -22,8 +22,13 @@
           buildPhase = ''
             runHook preBuild
 
+            # No `bun install`: the only dependencies are devDependencies
+            # (typescript, @types/node) used for editor/CI type-checking,
+            # and `bun build` bundles straight from src without them.
+            # Keeping the build network-free is required for sandboxed nix
+            # builds (Linux CI) -- a `bun install` here fails there with
+            # ConnectionRefused.
             export HOME=$TMPDIR
-            bun install --frozen-lockfile
             bun build --compile --minify src/index.ts --outfile ccwatch
 
             runHook postBuild
